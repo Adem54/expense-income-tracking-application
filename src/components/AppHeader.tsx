@@ -19,14 +19,13 @@ import { IsUserLoggedIn } from '../store/actions/userActions';
         <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
         <div className="logo" />
         <Menu theme="dark" mode="horizontal" selectedKeys={[pathname]} defaultSelectedKeys={['2']}>
-          {data.username ?  
-          <>
+          {data.username ?  ( <React.Fragment>
          <Menu.Item key="/logout"><Link to="/logout">Logout</Link>  </Menu.Item>
           <Menu.Item key="/categories"><Link to="/categories">Categories</Link></Menu.Item>
           <Menu.Item key="/records"><Link to="/records">Records</Link></Menu.Item> 
-          </>
-         
-          : loading ? null :  <Menu.Item key="/login">Login</Menu.Item> }
+          </React.Fragment>) : loading ? null :  (<Menu.Item key="/login">
+             <Link to="/login">Login</Link> 
+              </Menu.Item>) }
          
        
         </Menu>
