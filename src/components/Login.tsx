@@ -8,16 +8,16 @@ import { UserLoginForm } from "../types/user";
 import showError from "../utils/showError";
 import showSuccess from "../utils/showSuccess";
 
-const emptyForm:UserLoginForm={
-  username:"",
-  password:""
-}
+const emptyForm: UserLoginForm = {
+  username: "",
+  password: "",
+};
 export default function Login() {
-  const [form,setForm]=useState<UserLoginForm>(emptyForm)
-  console.log("formUser: ",form);
-  const history=useHistory();
-  const dispatch=useDispatch();
-  const {data,loading,error}=useSelector((state:AppState)=>state.user)
+  const [form, setForm] = useState<UserLoginForm>(emptyForm);
+  console.log("formUser: ", form);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { data, loading, error } = useSelector((state: AppState) => state.user);
   console.log("data: ", data);
   // const location = useLocation<{ newSignUp?: boolean }>();
   // console.log("location: ",location)
@@ -28,28 +28,27 @@ export default function Login() {
   const onFinish = (values: UserLoginForm) => {
     setForm(values);
     console.log("Success:", values);
-    dispatch(login(values))
+    dispatch(login(values));
   };
 
-useEffect(()=>{
-    data.username && showSuccess("You have successfully logged in!")
-},[data])
+  useEffect(() => {
+    data.username && showSuccess("You have successfully logged in!");
+  }, [data]);
 
   useEffect(() => {
-    console.log("formUser: ",form);
-    const token=localStorage.getItem("token");
-   if(!token && form.username && form.password  ){
-    error && showError(error)
-   }
-  
-   }, [error])
+    console.log("formUser: ", form);
+    const token = localStorage.getItem("token");
+    if (!token && form.username && form.password) {
+      error && showError(error);
+    }
+  }, [error]);
 
-   console.log("error: ",error);
+  console.log("error: ", error);
 
-   useEffect(()=>{
-    const token=localStorage.getItem("token");
-    if(token)return  history.push("/")
-   },[data])
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) return history.push("/");
+  }, [data]);
   return (
     <Form
       name="basic"
@@ -57,7 +56,6 @@ useEffect(()=>{
       wrapperCol={{ span: 16 }}
       initialValues={{ remember: true }}
       onFinish={onFinish}
-   
       autoComplete="off"
     >
       {state?.newSignUp && (
@@ -67,15 +65,12 @@ useEffect(()=>{
           subTitle="Please login by using your credentials"
         />
       )}
-
       <Form.Item
         label="Username"
         name="username"
         rules={[{ required: true, message: "Please input your username!" }]}
-
-        
       >
-        <Input 
+        <Input
           value={form.username}
           onChange={(e) =>
             setForm({
@@ -83,7 +78,6 @@ useEffect(()=>{
               username: e.target.value,
             })
           }
-        
         />
       </Form.Item>
 
@@ -93,14 +87,13 @@ useEffect(()=>{
         rules={[{ required: true, message: "Please input your password!" }]}
       >
         <Input.Password
-           value={form.password}
-           onChange={(e) =>
-             setForm({
-               ...form,
-               password: e.target.value,
-             })
-           }
-        
+          value={form.password}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              password: e.target.value,
+            })
+          }
         />
       </Form.Item>
 

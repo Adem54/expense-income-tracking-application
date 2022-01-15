@@ -8,15 +8,14 @@ import PrivateRoute from "./components/PrivateRoute";
 import Records from "./components/Records";
 import SignUp from "./components/SignUp";
 function App() {
-  const {  Content, Footer } = Layout;
+  const { Content, Footer } = Layout;
   return (
     <Layout>
       <AppHeader />
       <Content
         className="site-layout"
         style={{ padding: "50px", marginTop: 64 }}
-      >
-        <Route path="/register" component={SignUp} />
+      >  <Route path="/register" component={SignUp} />
         <Route path="/login" component={Login} />
         <PrivateRoute path="/categories" component={Categories} />
         <PrivateRoute path="/records" component={Records} />

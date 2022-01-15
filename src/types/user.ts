@@ -4,12 +4,10 @@ export interface UserRegisterForm extends UserLoginForm {
   email: string;
   full_name: string;
 }
-
 export interface UserLoginForm {
   username: string;
   password: string;
 }
-
 export interface User {
   username: string;
   message: string;
@@ -17,7 +15,6 @@ export interface User {
   full_name: string;
   token: string;
 }
-
 export interface UserState {
   data: User;
   loading: boolean;
