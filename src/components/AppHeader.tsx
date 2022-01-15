@@ -23,9 +23,15 @@ import { IsUserLoggedIn } from '../store/actions/userActions';
          <Menu.Item key="/logout"><Link to="/logout">Logout</Link>  </Menu.Item>
           <Menu.Item key="/categories"><Link to="/categories">Categories</Link></Menu.Item>
           <Menu.Item key="/records"><Link to="/records">Records</Link></Menu.Item> 
-          </React.Fragment>) : loading ? null :  (<Menu.Item key="/login">
-             <Link to="/login">Login</Link> 
-              </Menu.Item>) }
+          </React.Fragment>) : loading ? null :  (
+          <React.Fragment>
+             <Menu.Item key="/register">
+          <Link to="/register">SignUp</Link> 
+           </Menu.Item>
+          <Menu.Item key="/login">
+             <Link to="/login">Sign in</Link> 
+              </Menu.Item>
+          </React.Fragment>) }
          
        
         </Menu>

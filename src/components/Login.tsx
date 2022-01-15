@@ -1,5 +1,5 @@
 import { Form, Input, Button, Result } from "antd";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { AppState } from "../store";
@@ -8,7 +8,13 @@ import { UserLoginForm } from "../types/user";
 import showError from "../utils/showError";
 import showSuccess from "../utils/showSuccess";
 
+const emptyForm:UserLoginForm={
+  username:"",
+  password:""
+}
 export default function Login() {
+  const [form,setForm]=useState<UserLoginForm>(emptyForm)
+  console.log("formUser: ",form);
   const history=useHistory();
   const dispatch=useDispatch();
   const {data,loading,error}=useSelector((state:AppState)=>state.user)
@@ -20,6 +26,7 @@ export default function Login() {
   console.log("state: ", state);
 
   const onFinish = (values: UserLoginForm) => {
+    setForm(values);
     console.log("Success:", values);
     dispatch(login(values))
   };
@@ -29,8 +36,15 @@ useEffect(()=>{
 },[data])
 
   useEffect(() => {
+    console.log("formUser: ",form);
+    const token=localStorage.getItem("token");
+   if(!token && form.username && form.password  ){
     error && showError(error)
+   }
+  
    }, [error])
+
+   console.log("error: ",error);
 
    useEffect(()=>{
     const token=localStorage.getItem("token");
@@ -58,8 +72,19 @@ useEffect(()=>{
         label="Username"
         name="username"
         rules={[{ required: true, message: "Please input your username!" }]}
+
+        
       >
-        <Input />
+        <Input 
+          value={form.username}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              username: e.target.value,
+            })
+          }
+        
+        />
       </Form.Item>
 
       <Form.Item
@@ -67,7 +92,16 @@ useEffect(()=>{
         name="password"
         rules={[{ required: true, message: "Please input your password!" }]}
       >
-        <Input.Password />
+        <Input.Password
+           value={form.password}
+           onChange={(e) =>
+             setForm({
+               ...form,
+               password: e.target.value,
+             })
+           }
+        
+        />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
