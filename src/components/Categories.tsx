@@ -147,7 +147,7 @@ export default function Categories() {
             wrapperCol={{ span: 14 }}
             layout="horizontal"
           >
-            <Form.Item label="Input" required>
+            <Form.Item label="Category" required>
               <Input
                 value={form.name}
                 onChange={(e) =>
